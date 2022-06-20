@@ -2,43 +2,30 @@ from ast import List
 
 
 class Solution:
+    # log(min(m,n))
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
-        m = len(nums1)
-        n = len(nums2)
-        len_total = m + n
-        if (m>=n):
-            for num in nums2:
-                total_ls = binSort(nums1, num)
-        else:
-            for num in nums1:
-                total_ls = binSort(nums2, num)
-
-        if ((m+n)%2==0):
-            mid = (m+n) / 2
-            median = float((total_ls[mid-1]+total_ls[mid]) / 2)
-
-        else:
-            mid = (m+n-1) / 2
-            median = float(total_ls[mid])
+        A, B = nums1, nums2
+        total = len(A) + len(B)
+        half = total // 2
         
-        return median
-    
-
-def binSort(arr, num):
-    arr_len = len(arr)
-    if (arr_len%2==0):
-        half = int(arr_len / 2)
-    else:
-        half = int((arr_len+1) / 2)
-    new_arr = arr.copy()
-    if (num>=arr[-1]):
-        new_arr.append(num)
-    else:
-        left_ls = arr[:half]
-        right_ls = arr[half:]
-        if (num<left_ls[-1]):
-            binSort(left_ls, num)
-        else:
-            binSort(right_ls, num)
-    
-    return new_arr
+        if (len(A) > len(B)):
+            A, B = B, A
+            
+        l, r = 0, len(A) - 1
+        while True:
+            i = (l+r) // 2 #A
+            j = half - i - 2 #B
+            
+            Aleft = A[i] if i >= 0 else float("-infinity")
+            Aright = A[i+1] if i+1 < len(A) else float("infinity")
+            Bleft = B[j] if j >= 0 else float("-infinity")
+            Bright = B[j+1] if j+1 < len(B) else float("infinity")
+            
+            if (Aleft <= Bright) and (Bleft <= Aright):
+                if (total % 2):
+                    return min(Aright, Bright)
+                return max(Aleft, Bleft) + min(Aright, Bright) / 2
+            elif (Aleft > Bright):
+                r = i - 1
+            else:
+                l = i + 1
