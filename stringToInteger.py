@@ -1,7 +1,7 @@
 class Solution:
     def myAtoi(self, s: str) -> int:
         # leading whitespace
-        s = s.lstrip()
+        s = s.lstrip(" ")
         # positive / negative
         sign = 0
         if (s[0]=="+"):
@@ -25,12 +25,15 @@ class Solution:
             digit = int(s[i])
             res = res*10 + digit
         
-        if (res>MAX//10 or (res==MAX and int(s[len(s)-1]>MAX%10))):
+        if ((res>MAX//10 or (res==MAX//10 and int(s[len(s)-1]>MAX%10)))):
             return MAX
-        elif (res<MIN//10 or (res==MIN and int(s[len(s)-1]<MIN%10))):
+        elif ((res<MIN//10 or (res==MIN//10 and int(s[len(s)-1]<MIN%10)))):
             return MIN
         else:
             digit = int(s[len(s)-1])
             res = res*10 + digit
-
-            return res
+            
+        if not (sign==0):
+            res *= sign
+        
+        return res
