@@ -16,6 +16,7 @@
 -- FROM Employees ORDER BY employee_id;
 
 -- IF
+-- IF(condition, value_if_true, value_if_false)
 SELECT employee_id,
 IF (employee_id % 2 != 0 AND name NOT LIKE 'M%', salary , 0) AS bonus
 FROM Employees
