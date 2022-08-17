@@ -1,3 +1,4 @@
+-- failed
 SELECT IF(COUNT(a.salary)=2, a.salary, NULL) AS SecondHighestSalary
 FROM
 (SELECT salary
