@@ -1,0 +1,9 @@
+-- cannot use full outer join in leetcode
+-- SELECT employee_id
+-- FROM
+-- (SELECT *
+-- FROM Employees a
+-- FULL JOIN Salaries b
+-- ON a.employee_id = b.employee_id) c
+-- WHERE c.name IS NULL OR c.salary IS NULL
+-- ORDER BY employee_id;
