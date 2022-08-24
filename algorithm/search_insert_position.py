@@ -32,4 +32,4 @@ class Solution:
                 left = pivot + 1
         
 
-        return left+1 if (target>nums[left]) else left;
+        return left+1 if (target>nums[left]) else left
