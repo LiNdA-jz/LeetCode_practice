@@ -17,7 +17,7 @@ class Solution:
 
         # efficient
         if(not nums or len(nums) == 0):
-            return 0;
+            return 0
         
         left, right = 0, len(nums)-1
 
