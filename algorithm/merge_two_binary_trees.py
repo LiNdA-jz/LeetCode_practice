@@ -39,6 +39,7 @@ class Solution:
 
         if not root1 and not root2: return None
         ans = TreeNode((root1.val if root1 else 0) + (root2.val if root2 else 0))
+        # None if not root1 else root1.left
         ans.left = self.mergeTrees(root1 and root1.left, root2 and root2.left)
         ans.right = self.mergeTrees(root1 and root1.right, root2 and root2.right)
         return ans
