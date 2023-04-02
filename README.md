@@ -2,6 +2,6 @@
 * attemped
 * optimised (reference to discussion)
 
-## PProblem Lists
+## Problem Lists
 * SQL I
 * Problems from ALL Topics (ascending order)
