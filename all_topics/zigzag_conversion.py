@@ -59,3 +59,44 @@ class Solution:
                         answer += s[second_index]
                 index += diff
         return answer
+
+    # 29/10/2023 -> passed
+    def convert(self, s: str, numRows: int) -> str:
+        if len(s) <= numRows or numRows <= 1:
+            return s
+
+        res = []
+
+        pos = 0
+        diff_1 = (numRows - 1) * 2
+
+        # 1st row
+        while pos < len(s):
+            res.append(s[pos])
+            pos += diff_1
+
+        # mid
+        diff_2 = diff_1 - 2
+        diff_3 = diff_1 - diff_2
+
+        for mid_row in range(1, numRows - 1):
+            pos = mid_row
+            while pos < len(s):
+                res.append(s[pos])
+                if pos + diff_2 < len(s):
+                    pos += diff_2
+                    res.append(s[pos])
+                    pos += diff_3
+                else:
+                    pos += diff_2
+
+            diff_2 -= 2
+            diff_3 += 2
+
+        # last row
+        pos = numRows - 1
+        while pos < len(s):
+            res.append(s[pos])
+            pos += diff_1
+
+        return ''.join(res)
