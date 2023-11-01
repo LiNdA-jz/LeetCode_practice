@@ -70,3 +70,52 @@ class Solution:
                 r += num_map[n]
                 num -= n
         return r
+
+    # practice on 01/11/2023
+    # low performance
+    def intToRoman(self, num: int) -> str:
+        roman_dict = {
+            1: 'I',
+            5: 'V',
+            10: 'X',
+            50: 'L',
+            100: 'C',
+            500: 'D',
+            1000: 'M'
+        }
+
+        digit_list = []
+
+        while num >= 1:
+            digit_list.append((num % 10))
+            num //= 10
+
+        # print(digit_list)
+
+        roman_list = []
+
+        exp = 0
+        for i in digit_list:
+            cur_val = i * 10 ** exp
+            if cur_val in roman_dict:
+                roman_list.append(roman_dict[cur_val])
+            elif i == 4:
+                roman_list.append(roman_dict[5 * 10 ** exp])
+                roman_list.append(roman_dict[10 ** exp])
+            elif i == 9:
+                roman_list.append(roman_dict[10 ** (exp + 1)])
+                roman_list.append(roman_dict[10 ** exp])
+            elif i < 5:
+                for n in range(i):
+                    roman_list.append(roman_dict[10 ** exp])
+            else:
+                j = i - 5
+                for n in range(j):
+                    roman_list.append(roman_dict[10 ** exp])
+                roman_list.append(roman_dict[5 * 10 ** exp])
+
+            exp += 1
+
+        print(digit_list)
+
+        return ''.join(roman_list[::-1])

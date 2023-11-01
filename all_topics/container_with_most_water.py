@@ -26,3 +26,27 @@ class Solution:
             else:
                 right -= 1
         return answer
+
+    # practice on 01/11/2023
+    def maxArea(self, height: List[int]) -> int:
+        if len(height) <= 2:
+            return height[0] if height[0] <= height[1] else height[1]
+
+        max_vol = 0
+
+        l = 0
+        r = len(height) - 1
+
+        while l < r:
+            if height[l] <= height[r]:
+                cur_vol = height[l] * (r - l)
+                max_vol = max(max_vol, cur_vol)
+                l += 1
+            else:
+                cur_vol = height[r] * (r - l)
+                max_vol = max(max_vol, cur_vol)
+                r -= 1
+
+            # print(l," ", r, " ", max_vol)
+
+        return max_vol
