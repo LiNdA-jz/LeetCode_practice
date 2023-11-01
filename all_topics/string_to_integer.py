@@ -108,3 +108,55 @@ class Solution:
             if res * sign <= -2 ** 31:
                 return -2 ** 31
         return res * sign
+
+
+    # step by step
+    def myAtoi(self, s):
+        if len(s) <= 0:
+            return 0
+            # remove whitespace
+        while len(s) >= 1 and s[0] == ' ':
+            s = s[1:]
+
+        if len(s) <= 0:
+            return 0
+            # check sign:
+        sign = 1
+        while (s[0] == '-' or s[0] == '+') and len(s) >= 1:
+            sign = -1 if s[0] == '-' else 1
+            s = s[1:]
+            break
+
+        if len(s) <= 0:
+            return 0
+        # remove non-digits:
+        idx_s = 0
+        end_s = False
+        while idx_s < len(s) and not end_s:
+            if s[idx_s] < '0' or s[idx_s] > '9':
+                s = s[:idx_s]
+                end_s = True
+
+            idx_s += 1
+
+        if len(s) == 0:
+            return 0
+        elif len(s) == 1:
+            return sign * int(s)
+
+        else:
+            pow_s = len(s) - 1
+
+            pos_s = 0
+
+            for i in range(pow_s, -1, -1):
+                pos_s += 10 ** i * int(s[pow_s - i])
+
+            int_s = sign * pos_s
+
+            if int_s <= -2 ** 31:
+                return -2 ** 31
+            elif int_s >= 2 ** 31 - 1:
+                return 2 ** 31 - 1
+            else:
+                return int_s

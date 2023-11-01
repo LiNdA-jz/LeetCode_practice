@@ -49,3 +49,23 @@ class Solution:
             x //= 10
         rev *= sign
         return rev if rev >= -(2 ** 31) and rev <= (2 ** 31 - 1) else 0
+
+    # convert to string
+    def reverse(self, x: int) -> int:
+        str_x = str(x)
+        rev_str = str_x[::-1]
+
+        if x < 0:
+            rev_str = rev_str[:len(str_x) - 1]
+
+        print(rev_str)
+
+        while rev_str[0] == 0 and rev_str != 0:
+            rev_str = rev_str[1:]
+
+        rev_int = int(rev_str)
+
+        if rev_int > 2 ** 31 - 1 or rev_int < -2 ** (-31):
+            return 0
+        else:
+            return (-1) * rev_int if x < 0 else rev_int
