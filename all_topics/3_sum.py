@@ -86,8 +86,7 @@ class Solution:
                 else:
                     l.append([nums[i], nums[j], nums[k]])  # if sum s found equal to the target (0)
                     j += 1
-                    while nums[j - 1] == nums[
-                        j] and j < k:  # skipping if we found the duplicate of j and we dont need to check
+                    while nums[j - 1] == nums[j] and j < k:  # skipping if we found the duplicate of j and we dont need to check
                         # the duplicate of k cause it will automatically skip the duplicate by the adjustment of i and j
                         j += 1
         return l
