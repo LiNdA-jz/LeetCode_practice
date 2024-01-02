@@ -38,15 +38,15 @@ class Solution:
         # 使用了一个字符，只要 s[i]≠0 -> fi =f_{i−1}, 其中 s[i]=0
         # 使用了两个字符, s[i−1] 不能等于 0，并且 s[i−1] 和 s[i] 组成的整数必须小于等于 26 -> fi =f_{i−2}, 其中 s[i−1]=0 并且 10⋅s[i−1]+s[i]≤26, 只有当 i>1 时才能进行转移
     # 动态规划的边界条件为：f0=1
-    # def numDecodings(self, s: str) -> int:
-    #     n = len(s)
-    #     f = [1] + [0] * n
-    #     for i in range(1, n + 1):
-    #         if s[i - 1] != '0':
-    #             f[i] += f[i - 1]
-    #         if i > 1 and s[i - 2] != '0' and int(s[i-2:i]) <= 26:
-    #             f[i] += f[i - 2]
-    #     return f[n]
+    def numDecodings(self, s: str) -> int:
+        n = len(s)
+        f = [1] + [0] * n
+        for i in range(1, n + 1):
+            if s[i - 1] != '0':
+                f[i] += f[i - 1]
+            if i > 1 and s[i - 2] != '0' and int(s[i-2:i]) <= 26:
+                f[i] += f[i - 2]
+        return f[n]
 
 # 作者：力扣官方题解
 # 链接：https://leetcode.cn/problems/decode-ways/solutions/734344/jie-ma-fang-fa-by-leetcode-solution-p8np/
